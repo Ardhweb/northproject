@@ -1,0 +1,38 @@
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body d-flex flex-column" style="height: 100vh;">
+    {% if request.user.is_authenticated %}
+      <h4>Welcome, {{ request.user.username }}</h4>
+    {% endif %}
+    <div class="row d-flex justify-content-between">
+      <div class="col-auto">
+        <a href="{% url 'accounts:register' %}" class="btn btn-warning">Signup</a>
+      </div>
+      <div class="col-auto">
+        <a href="{% url 'accounts:login' %}" class="btn btn-primary">Login</a>
+      </div>
+    </div>
+    {% if request.user.is_authenticated %}
+    <div class="mt-5">
+      <p class="fs-6 text-sm-left text-capitalize fw-semibold">Find Users and Chat with New Friend below:</p>
+    <ul class="list-group " style="max-height: 200px; overflow-y: auto; height: 100vh; max-width: 100%;">
+      <li class="list-group-item">An item</li>
+      <li class="list-group-item">A second item</li>
+      <li class="list-group-item">A third item</li>
+      <li class="list-group-item">A fourth item</li>
+      <li class="list-group-item">And a fifth one</li>
+    </ul>
+    </div>
+    {% else %}
+    <h3>No Data </h3>
+    {% endif %}
+    
+    <!-- Copyright Footer -->
+    <div class="mt-auto text-center py-3">
+      <small>&copy; 2025 Your Company. All Rights Reserved.</small>
+    </div>
+  </div>
+</div>
