@@ -1,0 +1,20 @@
+from django.contrib.auth.models import User
+from django.db import models
+
+class ChatThread(models.Model):
+    alpha_user = models.ForeignKey(User, related_name='user1_threads', on_delete=models.CASCADE)
+    beta_user = models.ForeignKey(User, related_name='user2_threads', on_delete=models.CASCADE)
+    class Meta:
+        unique_together = ('alpha_user', 'beta_user')
+
+    # def __str__(self):
+    #     return f"Chat between {self.alpha_user.username} and {self.beta_user.username}"
+
+class ChatText(models.Model):
+    thread = models.ForeignKey(ChatThread, related_name='messages', on_delete=models.CASCADE)
+    sender = models.ForeignKey(User, on_delete=models.CASCADE)
+    message = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    # def __str__(self):
+    #     return f"Message from {self.sender.username} at {self.timestamp}"

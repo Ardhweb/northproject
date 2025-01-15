@@ -2,14 +2,19 @@ from django.shortcuts import render
 from django.http import request
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from django.contrib.auth import authenticate, login, logout 
-from .forms import LoginForm, UserRegistrationForm
-from django.contrib.auth import logout                                          
+from django.contrib.auth import authenticate, login
+from .forms import LoginForm, UserRegistrationForm                                       
 from django.contrib import auth, messages
 from .forms import LoginForm, UserRegistrationForm
 from django.http.response import HttpResponseRedirect
 from django.template.context import RequestContext
 from django.urls import reverse
+from django.contrib.auth import logout as auth_logout
+
+def user_logout(request):
+    auth_logout(request)  # Call Django's built-in logout function
+    return redirect("core:index")
+
 
 def user_login(request):
     if request.method == 'POST':
@@ -22,7 +27,7 @@ def user_login(request):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return redirect("index")
+                    return redirect("core:index")
                 else:
                     return HttpResponse('Disabled account')
             else:
@@ -30,12 +35,6 @@ def user_login(request):
     else:
         form = LoginForm()
     return render(request, 'accounts/login.html', {'form': form})
-
-
-def logout(request):
-    logout(request)
-    return redirect("index")
-    
 
 def register(request):
     if request.method == 'POST':
@@ -47,8 +46,7 @@ def register(request):
             user = authenticate(request, username=user_form.cleaned_data['username'], password=user_form.cleaned_data['password'])
             if user is not None:
                 login(request, user)
-            return redirect("index")
+            return redirect("core:index")
     else:
         user_form = UserRegistrationForm()
     return render(request,'accounts/register.html',{'user_form': user_form})
- 
