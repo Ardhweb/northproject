@@ -24,3 +24,5 @@ application = ProtocolTypeRouter({
         )
     ),
 })
+
+ASGI_APPLICATION = 'northproject.asgi.application'
