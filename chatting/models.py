@@ -1,11 +1,14 @@
 from django.contrib.auth.models import User
 from django.db import models
 
+
+
 class ChatThread(models.Model):
-    alpha_user = models.ForeignKey(User, related_name='user1_threads', on_delete=models.CASCADE)
-    beta_user = models.ForeignKey(User, related_name='user2_threads', on_delete=models.CASCADE)
+    room_name = models.CharField(max_length=500)
+    origin_user = models.ForeignKey(User, related_name='user1_threads', on_delete=models.CASCADE)
+    other_user = models.ForeignKey(User, related_name='user2_threads', on_delete=models.CASCADE)
     class Meta:
-        unique_together = ('alpha_user', 'beta_user')
+        unique_together = ('origin_user', 'other_user')
 
     # def __str__(self):
     #     return f"Chat between {self.alpha_user.username} and {self.beta_user.username}"

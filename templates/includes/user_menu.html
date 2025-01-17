@@ -25,7 +25,7 @@
     <ul class="list-group " style="max-height: 200px; overflow-y: auto; height: 100vh; max-width: 100%;">
       {% if auth_user %}
       {% for auth_user in auth_user  %}
-      <li class="list-group-item"><a href="{% url 'chatting:chat_room' room_name=testroom otheruser=auth_user.username %}">
+      <li class="list-group-item"><a href="{% url 'chatting:create_room' origin_user_id=request.user.id otheruser_id=auth_user.id %}">
         {{ auth_user.username }}
     </a>
     
