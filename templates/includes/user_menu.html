@@ -19,25 +19,7 @@
       </div>
     </div>
     {% endif %}
-    {% if request.user.is_authenticated %}
-    <div class="mt-5">
-      <p class="fs-6 text-sm-left text-capitalize fw-semibold">Find Users and Chat with New Friend below:</p>
-    <ul class="list-group " style="max-height: 200px; overflow-y: auto; height: 100vh; max-width: 100%;">
-      {% if auth_user %}
-      {% for auth_user in auth_user  %}
-      <li class="list-group-item"><a href="{% url 'chatting:create_room' origin_user_id=request.user.id otheruser_id=auth_user.id %}">
-        {{ auth_user.username }}
-    </a>
-    
-  </li>
-      {% endfor %}
-      {% else %}
-      {% endif %}
-    </ul>
-    </div>
-    {% else %}
-    <h3>No Data </h3>
-    {% endif %}
+  
     
     <!-- Copyright Footer -->
     <div class="mt-auto text-center py-3">

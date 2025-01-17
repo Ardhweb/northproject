@@ -2,4 +2,18 @@
 {% block title %}
 <title>Home</title>
 {% endblock title %}
-{% block content %}{% endblock content %}
+{% block content %}
+
+<div class="container m-4 ">
+  <h4>Active Chats</h4>
+    <ul class="list-group">
+        {% for room in active_rooms %}
+          <li class="list-group-item d-flex flex-row justify-content-around">
+            <a href="{% url 'chatting:chat_room' room_name=room.room_name origin_user_id=room.origin_user otheruser_id=room.other_user %}">Join Now</a>
+          </li>
+        {% endfor %}
+      </ul>
+      
+   
+</div>
+{% endblock content %}

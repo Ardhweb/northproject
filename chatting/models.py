@@ -5,8 +5,9 @@ from django.db import models
 
 class ChatThread(models.Model):
     room_name = models.CharField(max_length=500)
-    origin_user = models.ForeignKey(User, related_name='user1_threads', on_delete=models.CASCADE)
-    other_user = models.ForeignKey(User, related_name='user2_threads', on_delete=models.CASCADE)
+    origin_user = models.IntegerField()
+    other_user = models.IntegerField()
+    active = models.BooleanField(default=True)
     class Meta:
         unique_together = ('origin_user', 'other_user')
 
